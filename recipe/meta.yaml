@@ -95,3 +95,4 @@ extra:
     - ocefpaf
     - pelson
     - carlodri
+  feedstock-name: openssl
