@@ -1,16 +1,14 @@
-{% set version = "1.1.1l" %}
+{% set version = "1.1.1n" %}
 
 package:
   name: openssl_split
   version: {{ version }}
 
 source:
-  url: http://www.openssl.org/source/openssl-{{ version }}.tar.gz
-  sha256: 0b7a3e5e59c34827fe0c3a74b7ec8baef302b98fa80088d7f9153aa16fa76bd1
+  url: https://www.openssl.org/source/openssl-{{ version }}.tar.gz
+  sha256: 40dceb51a4f6a5275bde0e6bf20ef4b91bfc32ed57c0552e2e8e15463372b17a
   patches:
     - patches/0001-Don-t-use-USE_BCRYPTGENRANDOM-for-VS-older-than-2015.patch
-    # backport of https://github.com/openssl/openssl/pull/16409; can be dropped for ver >1.1.1l
-    - patches/0002-Darwin-platform-allows-to-build-on-releases-before-Y.patch
 
 build:
   number: 0
