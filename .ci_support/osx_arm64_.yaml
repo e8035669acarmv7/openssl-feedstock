@@ -1,11 +1,11 @@
 MACOSX_DEPLOYMENT_TARGET:
 - '11.0'
 c_compiler:
-- clang
+- clang_bootstrap
 c_compiler_version:
-- '11'
+- '12'
 channel_sources:
-- conda-forge/label/rust_dev,conda-forge
+- conda-forge
 channel_targets:
 - conda-forge main
 macos_machine:
