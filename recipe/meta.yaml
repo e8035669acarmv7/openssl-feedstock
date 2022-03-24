@@ -30,7 +30,7 @@ outputs:
       run_exports:
         # openssl's versioning is X.Y.Z(rev), where rev is really the patch release ID
         #    This pin allows the patch release to be >= the build-time openssl version.
-        - {{ pin_compatible('openssl', max_pin='x.x.x') }}
+        - {{ pin_subpackage('openssl', max_pin='x.x.x') }}
     requirements:
       build:
         - {{ compiler('c') }}  # [not osx]
