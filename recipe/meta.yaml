@@ -13,9 +13,7 @@ build:
 
 requirements:
   build:
-    - {{ compiler('c') }}  # [not osx]
-    # Break circular dependency openssl -> clang -> ld64 -> sigtool -> openssl
-    - {{ compiler('clang_bootstrap') }}  # [osx]
+    - {{ compiler('c') }}
     - nasm               # [win]
     - make               # [unix]
     - perl *
@@ -33,12 +31,12 @@ outputs:
         - {{ pin_subpackage('openssl', max_pin='x.x.x') }}
     requirements:
       build:
-        - {{ compiler('c') }}  # [not osx]
-        # Break circular dependency openssl -> clang -> ld64 -> sigtool -> openssl
-        - {{ compiler('clang_bootstrap') }}  # [osx]
+        - {{ compiler('c') }}
         - make
         - perl *
       # Empty host section to ensure that this is identified as cb3
+      # FIXME: this doesn't seem to be enough. We need a compiler in build
+      # with `compiler` jinja used to not use legacy cb2 build==host
       host:
       run:
         - ca-certificates
@@ -48,14 +46,13 @@ outputs:
       commands:
         - copy NUL checksum.txt        # [win]
         - touch checksum.txt           # [unix]
-        - openssl sha256 checksum.txt
+        - "$PREFIX/bin/openssl sha256 checksum.txt"     # [unix]
+        - "%LIBRARY_BIN%\\openssl sha256 checksum.txt"  # [win]
 
   - name: libopenssl-static
     requirements:
       build:
-        - {{ compiler('c') }}  # [not osx]
-        # Break circular dependency openssl -> clang -> ld64 -> sigtool -> openssl
-        - {{ compiler('clang_bootstrap') }}  # [osx]
+        - {{ compiler('c') }}
     script: install_libopenssl-static.sh  # [unix]
     script: install_libopenssl-static.bat  # [win]
     test:
