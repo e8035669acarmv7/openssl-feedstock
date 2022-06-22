@@ -1,4 +1,4 @@
-{% set version = "1.1.1o" %}
+{% set version = "1.1.1p" %}
 
 package:
   name: openssl_split
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://www.openssl.org/source/openssl-{{ version }}.tar.gz
-  sha256: 9384a2b0570dd80358841464677115df785edb941c71211f75076d72fe6b438f
+  sha256: bf61b62aaa66c7c7639942a94de4c9ae8280c08f17d4eac2e44644d9fc8ace6f
 
 build:
   number: 0
