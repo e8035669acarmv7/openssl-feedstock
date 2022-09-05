@@ -43,11 +43,16 @@ outputs:
       run:
         - ca-certificates
     test:
+      requires:
+        - pkg-config
       commands:
         - copy NUL checksum.txt        # [win]
         - touch checksum.txt           # [unix]
         - "$PREFIX/bin/openssl sha256 checksum.txt"     # [unix]
         - "%LIBRARY_BIN%\\openssl sha256 checksum.txt"  # [win]
+
+        # test pkgconfig metadata
+        - pkg-config --print-errors --exact-version "{{ version }}" openssl
 
   - name: libopenssl-static
     script: install_libopenssl-static.sh   # [unix]
